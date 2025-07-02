@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My First Webpage</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #dd2f2f;
+            text-align: center;
+            padding: 20px;
+            border-color: aqua;
+        }
+        h1 {
+            color: navy;
+        }
+        img {
+            border-radius: 10px;
+           margin: 10px;
+        }
+        a {
+            color: darkorange;
+            
+        }
+        button {
+            padding: 10px;  ;
+            background-color: navy;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to My Website</h1>
+    <p>This is my first webpage using HTML!</p>
+    <img  src="task-1.png" alt="Sample Image" width="250" height="250">
+    <p>Visit <a href="https://www.youtube.com">youtube</a> for more info.</p>
+
+    <button onclick="showMessage()">Click Me</button>
+
+    <script>
+        function showMessage() {
+            alert("Hello! You clicked the button!");
+        }
+    </script>
+</body>
+</html>
