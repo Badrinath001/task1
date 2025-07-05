@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intermediate HTML, CSS, JS - Task 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10;
+      padding: 0;
+      background-color: #f1f3f47c;
+    }
+
+    /* ===== Contact Form Styling ===== */
+    .form-section {
+      padding: 30px;
+      background-color: #ffffff;
+      max-width: 500px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .form-section h2 {
+      text-align: center;
+      color: navy;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: navy;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    /* ===== Responsive Layout Section ===== */
+    .layout-container {
+      display: grid;
+      grid-template-areas:
+        "nav nav"
+        "main aside";
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      margin: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+    nav {
+      grid-area: nav;
+      background: #001f3f;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    main {
+      grid-area: main;
+      background: #e2dddd;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    aside {
+      grid-area: aside;
+      background: #ddd;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .layout-container {
+        grid-template-areas:
+          "nav"
+          "main"
+          "aside";
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== To-Do List Section ===== */
+    .todo-section {
+      padding: 30px;
+      background-color: #ffffff;
+      max-width: 500px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .todo-section h2 {
+      text-align: center;
+      color: darkgreen;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      background: #f1f1f1;
+      margin: 5px 0;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 5px;
+    }
+
+    li button {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    li button:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== 1. Contact Form ===== -->
+  <div class="form-section">
+    <h2>Contact Form</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <!-- ===== 2. Responsive Layout ===== -->
+  <div class="layout-container">
+    <nav>Navigation Bar</nav>
+    <main>
+      <h3>Main Content</h3>
+      <p>This is the main area of the responsive layout.</p>
+    </main>
+    <aside>
+      <h3>Sidebar</h3>
+      <p>This is the sidebar content.</p>
+    </aside>
+  </div>
+
+  <!-- ===== 3. To-Do List ===== -->
+  <div class="todo-section">
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button onclick="addTask()">Add Task</button>
+    <ul id="taskList"></ul>
+  </div>
+
+  <!-- ===== JavaScript (Form Validation + To-Do Logic) ===== -->
+  <script>
+    // Form Validation
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("All fields are required!");
+        e.preventDefault();
+      } else if (!email.includes("@") || !email.includes(".")) {
+        alert("Enter a valid email address.");
+        e.preventDefault();
+      }
+    });
+
+    // To-Do List
+    function addTask() {
+      const input = document.getElementById("taskInput");
+      const task = input.value.trim();
+      if (task === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = task;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "❌";
+      removeBtn.onclick = () => li.remove();
+
+      li.appendChild(removeBtn);
+      document.getElementById("taskList").appendChild(li);
+      input.value = "";
+      
+    }
+  </script>
+
+</body>
+</html>
