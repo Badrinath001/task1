@@ -92,48 +92,6 @@
         grid-template-columns: 1fr;
       }
     }
-
-    /* ===== To-Do List Section ===== */
-    .todo-section {
-      padding: 30px;
-      background-color: #ffffff;
-      max-width: 500px;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .todo-section h2 {
-      text-align: center;
-      color: darkgreen;
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    li {
-      background: #f1f1f1;
-      margin: 5px 0;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      border-radius: 5px;
-    }
-
-    li button {
-      background: red;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    li button:hover {
-      background: darkred;
-    }
   </style>
 </head>
 <body>
@@ -161,14 +119,6 @@
     </aside>
   </div>
 
-  <!-- ===== 3. To-Do List ===== -->
-  <div class="todo-section">
-    <h2>To-Do List</h2>
-    <input type="text" id="taskInput" placeholder="Enter a new task">
-    <button onclick="addTask()">Add Task</button>
-    <ul id="taskList"></ul>
-  </div>
-
   <!-- ===== JavaScript (Form Validation + To-Do Logic) ===== -->
   <script>
     // Form Validation
@@ -186,24 +136,7 @@
       }
     });
 
-    // To-Do List
-    function addTask() {
-      const input = document.getElementById("taskInput");
-      const task = input.value.trim();
-      if (task === "") return;
-
-      const li = document.createElement("li");
-      li.textContent = task;
-
-      const removeBtn = document.createElement("button");
-      removeBtn.textContent = "❌";
-      removeBtn.onclick = () => li.remove();
-
-      li.appendChild(removeBtn);
-      document.getElementById("taskList").appendChild(li);
-      input.value = "";
-      
-    }
+    
   </script>
 
 </body>
