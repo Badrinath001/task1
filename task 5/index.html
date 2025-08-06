@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>INFO MATTER SMARTSHOP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      button {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    
+      transition: color 0.3s;
+    }
+
+    .hero {
+      text-align: center;
+      background: #e6f7f5;
+      padding: 50px 20px;
+    }
+
+    .hero .btn {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      justify-content: center;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      height: auto;
+    }
+
+    button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    .cart-section {
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛍️ INFO-ShopSmart</h1>
+    <nav>
+      <a href="#" onclick="showHome()">Home</a>
+      <a href="#" onclick="showProducts()">Products</a>
+      <a href="#" onclick="showCart()">Cart 🛒</a>
+    </nav>
+  </header>
+
+  <main id="mainContent">
+    <!-- Content will load here -->
+   
+  </main>
+
+  <footer>
+    &copy; 2025 ShopSmart. All rights reserved.
+  </footer>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "T-Shirt",
+        price: 499,
+        image: "https://via.placeholder.com/200x200.png?text=T-Shirt"
+      },
+      {
+        id: 2,
+        name: "Smart Watch",
+        price: 1999,
+        image: "https://via.placeholder.com/200x200.png?text=Watch"
+      },
+      {
+        id: 3,
+        name: "Shoes",
+        price: 999,
+        image: "https://via.placeholder.com/200x200.png?text=Shoes"
+      }
+    ];
+
+    function showHome() {
+      document.getElementById('mainContent').innerHTML = `
+        <section class="hero">
+          <h2>Welcome to ShopSmart</h2>
+          <p>Explore top quality products at unbeatable prices!</p>
+          <a href="#" class="btn" onclick="showProducts()">Shop Now</a>
+        </section>
+      `;
+    }
+
+    function showProducts() {
+      let html = '<h2 style="text-align:center; padding: 20px;">Our Products</h2><div class="product-grid">';
+      products.forEach(product => {
+        html += `
+          <div class="product">
+            <img src="${product.image}" alt="${product.name}" />
+            <h3>${product.name}</h3>
+            <p>₹${product.price}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+          </div>
+        `;
+      });
+      html += '</div>';
+      document.getElementById('mainContent').innerHTML = html;
+    }
+
+    function addToCart(id) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const product = products.find(p => p.id === id);
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(`${product.name} added to cart!`);
+    }
+
+    function showCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let html = '<div class="cart-section"><h2>Your Cart</h2>';
+      if (cart.length === 0) {
+        html += "<p>Your cart is empty.</p></div>";
+      } else {
+        let total = 0;
+        cart.forEach(item => {
+          total += item.price;
+          html += `<p>${item.name} - ₹${item.price}</p>`;
+        });
+        html += `<h3>Total: ₹${total}</h3></div>`;
+      }
+      document.getElementById('mainContent').innerHTML = html;
+    }
+
+    // Load home on startup
+    showHome();
+  </script>
+
+</body>
+</html>
